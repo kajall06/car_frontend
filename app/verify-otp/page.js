@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import API from "@/lib/api";
 
-export default function VerifyOtpPage() {
+function VerifyOtpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -100,5 +100,14 @@ export default function VerifyOtpPage() {
 
       </div>
     </div>
+  );
+}
+
+// 🔥 IMPORTANT WRAPPER
+export default function VerifyOtpPage() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <VerifyOtpContent />
+    </Suspense>
   );
 }
